@@ -1,0 +1,10 @@
+# local and dist folders
+node_modules
+dist
+
+# log files
+*.log
+
+# IDE files
+
+
