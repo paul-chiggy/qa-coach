@@ -1,4 +1,4 @@
-# www
+# QA Coach
 
 ## Project setup
 ```
