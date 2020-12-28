@@ -1,11 +1,11 @@
 <template>
   <div class="main-page">
-    <ImageCaptureComponent capture="I am a capture for images"/>
+    <ImageCaptureComponent capture="QA coaching"/>
     <h1>{{ msg }}</h1>
     <h3>Under construction</h3>
     <p>
       This website is temporarily under construction. Please, for further details refer to:
-      <a href="http://pavlo.nl" target="_blank">this website</a>
+      <a href="https://pavlo.nl" target="_blank">this website</a>
     </p>
   </div>
 </template>

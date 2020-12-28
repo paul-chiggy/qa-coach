@@ -1,6 +1,6 @@
 <template>
   <img class="logo" alt="QA coach logo" src="./assets/logo.png">
-  <MainPage msg="Welcome QA dot coach"/>
+  <MainPage msg="Welcome to [QA coach]"/>
 </template>
 
 <script>

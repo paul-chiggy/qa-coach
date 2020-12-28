@@ -1,7 +1,7 @@
 <template>
   <div class="image-capture-component">
     <p>
-      {{capture}}
+      {{ capture }}
     </p>
   </div>
 </template>
