@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    image: qa-coach
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: on-failure
+    ports:
+      - "8081:8080"
+    volumes:
+      - /app/node_modules
+      - .:/app
+  tests:
+    image: qa-coach
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: on-failure
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["yarn", "run", "lint"]

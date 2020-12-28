@@ -1,6 +1,6 @@
 <template>
   <div class="main-page">
-    <ImageCaptureComponent capture="QA coaching"/>
+    <ImageCaptureComponent capture="QA coaching platform"/>
     <h1>{{ msg }}</h1>
     <h3>Under construction</h3>
     <p>
