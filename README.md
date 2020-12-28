@@ -1,5 +1,8 @@
 # QA Coach
 
+## Pre-requisites
+To be able to run this project you'll need Docker.
+
 ## Project setup
 ```
 yarn install
