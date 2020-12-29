@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t pavlochigishev/qa.coach:latest -f Dockerfile.dev .
+  - docker build -t pavlochigishev/qa.coach:latest .
 
 scripts:
   - docker run -e CI=true pavlochigishev/qa.coach yarn run test
