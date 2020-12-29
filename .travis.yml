@@ -8,3 +8,16 @@ before_install:
 scripts:
   - docker run -e CI=true pavlochigishev/qa.coach yarn run test
   - docker run -e CI=true pavlochigishev/qa.coach yarn run lint
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "qa.coach"
+  env: "Qacoach-env"
+  bucket_name: "elasticbeanstalk-us-east-2-638777900629"
+  bucket_path: "qa.coach"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
