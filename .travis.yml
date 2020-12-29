@@ -10,15 +10,25 @@ scripts:
   - docker run -e CI=true pavlochigishev/qa.coach yarn run lint
 
 deploy:
-  provider: elasticbeanstalk
-  region: "us-east-2"
-  app: "qa.coach"
-  env: "Qacoach-env"
-  bucket_name: "elasticbeanstalk-us-east-2-638777900629"
-  bucket_path: "qa.coach"
-  on:
-    branch: main
-    tags: true
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  edge: true
+  - provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "qa.coach"
+    env: "Qacoach-env"
+    bucket_name: "elasticbeanstalk-us-east-2-638777900629"
+    bucket_path: "qa.coach"
+    on:
+      tags: true
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    edge: true
+  - provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "qa.coach"
+    env: "Qacoach-env-staging"
+    bucket_name: "elasticbeanstalk-us-east-2-638777900629"
+    bucket_path: "qa.coach"
+    on:
+      branch: develop
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    edge: true
