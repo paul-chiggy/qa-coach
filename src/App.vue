@@ -7,7 +7,7 @@
 import MainPage from './components/MainPage.vue'
 
 export default {
-  name: 'App',
+  name: 'QA Coach',
   components: {
     MainPage
   }

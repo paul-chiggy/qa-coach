@@ -20,4 +20,4 @@ services:
     volumes:
       - /app/node_modules
       - .:/app
-    command: ["yarn", "run", "lint"]
+    command: ["yarn", "run", "test"]

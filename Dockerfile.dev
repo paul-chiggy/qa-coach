@@ -6,7 +6,6 @@ WORKDIR /app
 
 # copy config with dependancies and install them
 COPY package.json .
-COPY yarn.lock .
 RUN yarn install
 
 # copy rest of the files
