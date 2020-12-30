@@ -13,7 +13,7 @@ deploy:
   - provider: elasticbeanstalk
     region: "us-east-2"
     app: "qa.coach"
-    env: "qa-prod"
+    env: "www-production"
     bucket_name: "elasticbeanstalk-us-east-2-638777900629"
     bucket_path: "qa.coach"
     on:
@@ -24,7 +24,7 @@ deploy:
   - provider: elasticbeanstalk
     region: "us-east-2"
     app: "qa.coach"
-    env: "qa-staging"
+    env: "www-staging"
     bucket_name: "elasticbeanstalk-us-east-2-638777900629"
     bucket_path: "qa.coach"
     on:
