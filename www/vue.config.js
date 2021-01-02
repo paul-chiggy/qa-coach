@@ -4,9 +4,9 @@ module.exports =
   pages: {
     index: {
       // entry for the page
-      entry: "www/src/main.js",
+      entry: "./src/main.js",
       // the source template
-      template: "www/public/index.html",
+      template: "./public/index.html",
       // output as dist/index.html
       filename: "index.html",
       // when using title option,
@@ -16,5 +16,12 @@ module.exports =
       // extracted common chunks and vendor chunks.
       chunks: ["chunk-vendors", "chunk-common", "index"]
     }
+  },
+  devServer: {
+    // allow all hosts
+    host: "0.0.0.0",
+    disableHostCheck: true, // TODO: insecure, but probably fine for dev environment
+    contentBase: "./www/public",
+    index: "./www"
   }
 };

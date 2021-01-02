@@ -19,10 +19,12 @@ const pgClient = new Pool({
     password: keys.pgPassword,
     port: parseInt(keys.pgPort),
 });
-pgClient.on("error", () => console.log("Postgress client: lost Postgress connection"));
 
-pgClient.query("CREATE TABLE IF NOT EXIST values (number INT)")
-    .catch((err) => console.log(err));
+pgClient.on("connect", () => {
+    pgClient
+        .query("CREATE TABLE IF NOT EXISTS values (number INT)")
+            .catch((err) => console.log(err));
+});
 
 // Redis client setup
 const redis = require("redis");
@@ -32,35 +34,38 @@ const redisClient = redis.createClient({
     retry_strategy: () => 1000
 });
 const redisPublisher = redisClient.duplicate();
+const healthCheck = {
+    health: 200
+};
 
 // Express api routing handler
 app.get("/", (req, res) => {
-    res.send("Hi");
+    res.send(healthCheck);
 });
 
 app.get("/values/all", async (req, res) => {
-    // query DB, values table
-    const values = await pgClient.query("SELECT * FROM values");
+    // query postgres DB, values table
+    const values = await pgClient.query("SELECT DISTINCT * FROM values ORDER BY number ASC");
     // send all selected entries back in response
     res.send(values.rows);
 });
 
 app.get("/values/current", async (req, res) => {
-    // query DB, values table
+    // query redis DB, values table
     redisClient.hgetall("values", (err, values) => {
         res.send(values);
     });
 });
 
-app.post("/values", async (req, res) => {
+app.post("/values/new", async (req, res) => {
     const index = req.body.index;
 
     // capping to max 40 to avoid resources overhead and for testing purposes
-    if(parseInt(index) > 40) {
-        return res.status(422).send("Provided index is too high, max 40");
+    if(parseInt(index) > 100000) {
+        return res.status(422).send("Provided index is too high, max 100000");
     }
 
-    redisClient.hset("values", index, "Nothing yet!");
+    redisClient.hsetnx("values", index, cube(index).toString());
     // save to Redis "temp" values collection
     redisPublisher.publish("insert", index);
     // save to Postgress in "permamnent" values table
@@ -68,6 +73,10 @@ app.post("/values", async (req, res) => {
     res.send({ working: true });
 });
 
+function cube(number) {
+    return number * number;
+}
+
 app.listen(5000, err => {
-    console.log("Listening...");
+    console.log("Api server is listening on port: [" + 5000 +"]");
 });

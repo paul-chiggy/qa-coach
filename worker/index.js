@@ -10,14 +10,13 @@ const redisClient = redis.createClient({
     retry_strategy: () => 1000
 });
 const sub = redisClient.duplicate();
+sub.subscribe("insert");
 
 // classic fibonacci number solution
-function fib(index) {
-    if(index < 2) return 1;
-    return fib(index - 1) + fib(index -2 );
+function squared(number) {
+    return number * number;
 }
 
 sub.on("message", (channel, message) => {
-    redisClient.hset("values", message, fib(parseInt(message)));
+    redisClient.hsetnx("values", message, squared(parseInt(message)).toString());
 });
-sub.subscribe("insert");

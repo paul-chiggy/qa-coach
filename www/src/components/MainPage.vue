@@ -1,22 +1,16 @@
 <template>
-  <div class="main-page">
-    <ImageCaptureComponent capture="QA coaching platform"/>
+  <div id="content">
     <h1>{{ msg }}</h1>
-    <h3>Under construction</h3>
-    <p>
-      This website is temporarily under construction. Please, for further details refer to:
-      <a href="https://pavlo.nl" target="_blank">this website</a>
-    </p>
+    <h1>Coming soon...</h1>
   </div>
 </template>
 
 <script>
-import ImageCaptureComponent from './ImageCaptureComponent.vue'
 
 export default {
-  name: 'MainPage',
+  name: "MainPage",
   components: {
-    ImageCaptureComponent
+    // add here 
   },
   props: {
     msg: String
@@ -37,7 +31,7 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-a {
-  color: #42b983;
+#content {
+  height: 100%;
 }
 </style>

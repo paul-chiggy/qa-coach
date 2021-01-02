@@ -1,23 +1,88 @@
 version: '3'
 services:
-  web:
-    image: qa-coach
+  nginx:
+    logging: 
+      driver: none
+    depends_on:
+      - web
+      - api-server
+      - postgres
+      - redis
+    restart: always
+    image: qa-coach-nginx
+    container_name: qa-coach-nginx
     build:
-      context: .
+      context: ./nginx
       dockerfile: Dockerfile.dev
-    restart: on-failure
     ports:
-      - "8081:8080"
+      - "4040:80"
+  postgres:
+    logging: 
+      driver: none
+    image: "postgres:latest"
+    environment: 
+      - POSTGRES_PASSWORD=yoursecurepassword
+  redis:
+    logging: 
+      driver: none
+    image: "redis:latest"
+  api-server:
+    image: qa-coach-api
+    container_name: qa-coach-api
+    logging: 
+      driver: none
+    build:
+      context: ./api-server
+      dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
-      - .:/app
-  tests:
-    image: qa-coach
+      - ./api-server:/app
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGPORT=5432
+      - PGPASSWORD=yoursecurepassword
+      - PGDATABASE=postgres
+      - API_PORT=5000
+    ports:
+      - "5050:5000"
+    expose: 
+      - 5000
+  web:
+    logging: 
+      driver: none
+    image: qa-coach-web
+    container_name: qa-coach-web
     build:
-      context: .
+      context: ./www
       dockerfile: Dockerfile.dev
     restart: on-failure
     volumes:
       - /app/node_modules
-      - .:/app
+      - ./www:/app
+    expose: 
+      - 8080
+  worker:
+    image: qa-coach-worker
+    container_name: qa-coach-worker
+    logging: 
+      driver: none
+    build:
+      context: ./worker
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./worker:/app
+  tests:
+    image: qa-coach-tests
+    container_name: qa-coach-tests
+    build:
+      context: ./www
+      dockerfile: Dockerfile.dev
+    restart: on-failure
+    volumes:
+      - /app/node_modules
+      - ./www:/app
     command: ["yarn", "run", "test"]

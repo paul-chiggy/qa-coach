@@ -1,30 +1,57 @@
 <template>
-  <img class="logo" alt="QA coach logo" src="./assets/logo.png">
-  <MainPage msg="Welcome to [QA coach]"/>
+  <div>
+    <Header />
+    <div id="main">
+      <div class="content">
+        <router-view></router-view>
+      </div>
+      <Sidebar />
+    </div>
+    <Footer />
+  </div>
 </template>
 
 <script>
-import MainPage from './components/MainPage.vue'
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
+import Sidebar from "./components/Sidebar.vue";
 
 export default {
-  name: 'QA Coach',
+  name: "QA Coach",
   components: {
-    MainPage
+    Header,
+    Footer,
+    Sidebar
   }
 }
 </script>
 
 <style>
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0px;
+  display: block;
+  position: relative;
+  background-color: #fafafa;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color:rgb(36, 36, 36);
+  height: 100%;
+  position: relative;
 }
-.logo {
-  height: 230px;
-  width: 300px;
+a {
+  color: #2e2e2e
+}
+a:hover {
+  color:rgb(106, 105, 105);
+}
+.content {
+  width: 66.6%;
 }
 </style>

@@ -2,7 +2,7 @@
 FROM node:alpine
 
 # set the working directory
-WORKDIR /app
+WORKDIR '/app'
 
 # copy config with dependancies and install them
 COPY package.json .

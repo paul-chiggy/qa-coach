@@ -18,7 +18,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 p {
-  color: #4a4fe6;
+  color: #701cba;
   font-weight: bold;
   margin-bottom: 10px;
 }
