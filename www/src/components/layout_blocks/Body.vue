@@ -10,11 +10,11 @@ import Sidebar from "./Sidebar.vue";
 import Content from "./Content.vue";
 
 export default {
-    name: "body-main",
-    components: {
-        Sidebar,
-        Content
-    }
+  name: "body-main",
+  components: {
+    Sidebar,
+    Content
+  }
 }
 </script>
 

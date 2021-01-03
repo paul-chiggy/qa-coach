@@ -15,13 +15,13 @@ export default {
 
 <style scoped>
 #sidebar {
-    width: 32%;
-    float: right;
-    font-weight: bold;
-    background-color: #f7f7f7;
-    border: 1px solid #cdcdcd;
-    box-shadow: 2px 1px 1px #cdcdcd;
-    border-radius: 8px;
+  width: 32%;
+  float: right;
+  font-weight: bold;
+  background-color: #f7f7f7;
+  border: 1px solid #cdcdcd;
+  box-shadow: 1px 1px 1px #cdcdcd;
+  border-radius: 8px;
 }
 @media (min-width: 0px) and (max-width: 767px) {
   #sidebar {

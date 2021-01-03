@@ -10,10 +10,10 @@
 
 <script>
 export default {
-    name: "Under Construction",
-    components: {
-      // add here
-    }
+  name: "Under Construction",
+  components: {
+    // add here
+  }
 }
 </script>
 

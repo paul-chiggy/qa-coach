@@ -22,8 +22,10 @@ const pgClient = new Pool({
 
 pgClient.on("connect", () => {
     pgClient
-        .query("CREATE TABLE IF NOT EXISTS values (number INT)")
-            .catch((err) => console.log(err));
+        .query("CREATE TABLE IF NOT EXISTS values (number INT);" +
+        "CREATE TABLE IF NOT EXISTS app_info (name TEXT, author TEXT);" +
+        "INSERT INTO app_info(name,author) VALUES('QA Coach','Pavlo Chigishev © 2021');"
+        ).catch((err) => console.log(err));
 });
 
 // Redis client setup
@@ -65,7 +67,7 @@ app.post("/values/new", async (req, res) => {
         return res.status(422).send("Provided index is too high, max 100000");
     }
 
-    redisClient.hsetnx("values", index, cube(index).toString());
+    redisClient.hsetnx("values", index, squared(index).toString());
     // save to Redis "temp" values collection
     redisPublisher.publish("insert", index);
     // save to Postgress in "permamnent" values table
@@ -73,9 +75,16 @@ app.post("/values/new", async (req, res) => {
     res.send({ working: true });
 });
 
-function cube(number) {
+function squared(number) {
     return number * number;
 }
+
+app.get("/info", async (req, res) => {
+    // query postgres DB, values table
+    const values = await pgClient.query("SELECT DISTINCT name, author FROM app_info");
+    // send all selected entries back in response
+    res.send(values.rows);
+});
 
 app.listen(parseInt(keys.apiPort), err => {
     console.log("Api server is listening on port: [" + keys.apiPort +"]");

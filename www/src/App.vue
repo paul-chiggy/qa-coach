@@ -14,7 +14,7 @@ import Footer from "./components/layout_blocks/Footer.vue";
 import Body from "./components/layout_blocks/Body.vue";
 
 export default {
-  name: "QA Coach",
+  name: "app-qa",
   components: {
     Header,
     Body,
