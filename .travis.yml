@@ -6,7 +6,8 @@ before_install:
   - docker build -t pavlochigishev/qa.coach-test-www:latest -f ./www/Dockerfile.dev ./www
 
 scripts:
-  - docker run -e CI=true pavlochigishev/qa.coach-test-www:latest yarn run test && yarn run lint
+  # unit tests and linting here
+  - docker run -e CI=true pavlochigishev/qa.coach-test-www:latest yarn run tests
 
 after_success:
   - docker build -t pavlochigishev/qa.coach-prod-www:latest ./www
