@@ -2,15 +2,16 @@
     <div id="calculator">
     {{ title }}
         <form @submit.prevent="onSubmit">
-            <label>Submit your number to calculate its squared value: </label>
             <br/>
+            <label>Submit your number to calculate its squared value: </label>
+            <br/><br/>
             <input
                 placeholder=" type here "
                 type="text"
                 v-model="index"
                 @input="updateIndex($event.target.value)"
             />
-            <br/>
+            <br/><br/>
             <button>Submit</button>
         </form>
 
@@ -87,13 +88,13 @@ export default {
 <style scoped>
 h3 {
     margin: 20px 0 0;
-    color:#e6d2f7;
+    color:#701cba;
     font-weight: bold;
 }
 #calculator {
     padding: 10px 0 10px 0;
 }
 p {
-    color: #e6d2f7;
+    color: #701cba;
 }
 </style>

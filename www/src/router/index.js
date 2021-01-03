@@ -1,29 +1,29 @@
 import { createWebHistory, createRouter } from "vue-router";
-import MainPage from "./../components/MainPage.vue";
-import Calculator from "./../components/Calculator.vue";
-import UnderConstruction from "./../components/UnderConstruction.vue";
+import Calculator from "../components/pages/Calculator.vue";
+import FrontPage from "../components/pages/FrontPage.vue";
+import Contacts from "../components/pages/Contacts.vue";
 
 const routes = [
     {
         path: "/",
         name: "Home",
-        component: MainPage,
+        component: FrontPage
     },
     {
         path: "/calc",
         name: "Calculator",
-        component: Calculator,
+        component: Calculator
     },
     {
-        path: "/tmp",
-        name: "Under Construction",
-        component: UnderConstruction,
+        path: "/contacts",
+        name: "Contacts",
+        component: Contacts
     }
 ];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes
 });
 
 export default router;

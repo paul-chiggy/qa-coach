@@ -77,6 +77,6 @@ function cube(number) {
     return number * number;
 }
 
-app.listen(5000, err => {
-    console.log("Api server is listening on port: [" + 5000 +"]");
+app.listen(parseInt(keys.apiPort), err => {
+    console.log("Api server is listening on port: [" + keys.apiPort +"]");
 });

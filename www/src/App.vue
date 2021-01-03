@@ -1,27 +1,24 @@
 <template>
-  <div>
-    <Header />
-    <div id="main">
-      <div class="content">
-        <router-view></router-view>
-      </div>
-      <Sidebar />
+  <div id="wrapper">
+    <div id="wrapper_inner">
+      <Header />
+      <Body />
     </div>
     <Footer />
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
-import Sidebar from "./components/Sidebar.vue";
+import Header from "./components/layout_blocks/Header.vue";
+import Footer from "./components/layout_blocks/Footer.vue";
+import Body from "./components/layout_blocks/Body.vue";
 
 export default {
   name: "QA Coach",
   components: {
     Header,
-    Footer,
-    Sidebar
+    Body,
+    Footer
   }
 }
 </script>
@@ -51,7 +48,21 @@ a {
 a:hover {
   color:rgb(106, 105, 105);
 }
-.content {
-  width: 66.6%;
+h1, h2, h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+#wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

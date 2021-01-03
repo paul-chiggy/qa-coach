@@ -2,7 +2,7 @@
     <div id="nav">
         <router-link to="/">Home</router-link> |
         <!--<router-link to="/calc">Calculator</router-link> | -->
-        <router-link to="/tmp">Under construction</router-link>
+        <router-link to="/contacts">Contacts</router-link>
     </div>
 </template>
 

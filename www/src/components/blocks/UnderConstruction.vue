@@ -1,6 +1,5 @@
 <template>
   <div class="under-construction">
-    <ImageCaptureComponent capture="QA coaching platform"/>
     <h3>Under construction</h3>
     <p>
       This website is temporarily under construction. Please, for further details refer to:
@@ -10,12 +9,10 @@
 </template>
 
 <script>
-import ImageCaptureComponent from "./ImageCaptureComponent.vue";
-
 export default {
     name: "Under Construction",
     components: {
-        ImageCaptureComponent
+      // add here
     }
 }
 </script>
@@ -23,6 +20,5 @@ export default {
 <style scoped>
 .under-construction {
   height: 100%;
-  padding: 10px;
 }
 </style>
