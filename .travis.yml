@@ -3,32 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t pavlochigishev/qa.coach:latest -f Dockerfile.dev .
+  - docker build -t pavlochigishev/qa.coach-test-www:latest -f ./www/Dockerfile.dev ./www
 
 scripts:
-  - docker run -e CI=true pavlochigishev/qa.coach cd www && yarn run test
-  - docker run -e CI=true pavlochigishev/qa.coach cd www && yarn run lint
+  - docker run -e CI=true pavlochigishev/qa.coach yarn run test && yarn run lint
 
-deploy:
-  - provider: elasticbeanstalk
-    region: "us-east-2"
-    app: "qa.coach"
-    env: "www-production"
-    bucket_name: "elasticbeanstalk-us-east-2-638777900629"
-    bucket_path: "qa.coach"
-    on:
-      tags: true
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    edge: true
-  - provider: elasticbeanstalk
-    region: "us-east-2"
-    app: "qa.coach"
-    env: "www-staging"
-    bucket_name: "elasticbeanstalk-us-east-2-638777900629"
-    bucket_path: "qa.coach"
-    on:
-      branch: develop
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    edge: true
+after_success:
+  - docker build -t pavlochigishev/qa.coach-prod-www:latest ./www
+  - docker build -t pavlochigishev/qa.coach-prod-api:latest ./api-server
+  - docker build -t pavlochigishev/qa.coach-prod-worker:latest ./worker
+  - docker build -t pavlochigishev/qa.coach-prod-nginx:latest ./nginx
+  # docker login via CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push built images to docker hub
+  - docker push -t pavlochigishev/qa.coach-prod-www:latest
+  - docker push -t pavlochigishev/qa.coach-prod-api:latest
+  - docker push -t pavlochigishev/qa.coach-prod-worker:latest
+  - docker push -t pavlochigishev/qa.coach-prod-nginx:latest

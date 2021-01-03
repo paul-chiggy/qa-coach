@@ -1,0 +1,17 @@
+# start from the base image
+FROM node:alpine
+
+# set the working directory
+WORKDIR '/app'
+
+# copy config with dependancies and install them
+COPY package.json .
+RUN yarn install
+
+# copy rest of the files
+# we leave this command here even though
+# we mount all dirs in docker-compose.yml
+COPY . .
+
+# set the container's primary command
+CMD ["yarn", "run", "start"]
