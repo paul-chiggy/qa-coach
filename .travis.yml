@@ -17,8 +17,8 @@ after_success:
   # docker login via CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push built images to docker hub
-  - docker push -t pavlochigishev/qa.coach-prod-web:latest
-  - docker push -t pavlochigishev/qa.coach-prod-api-server:latest
-  - docker push -t pavlochigishev/qa.coach-prod-worker:latest
-  - docker push -t pavlochigishev/qa.coach-prod-nginx:latest
+  - docker push -a pavlochigishev/qa.coach-prod-web
+  - docker push -a pavlochigishev/qa.coach-prod-api-server
+  - docker push -a pavlochigishev/qa.coach-prod-worker
+  - docker push -a pavlochigishev/qa.coach-prod-nginx
 
