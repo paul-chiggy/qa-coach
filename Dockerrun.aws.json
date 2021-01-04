@@ -5,19 +5,22 @@
             "name": "web",
             "image": "pavlochigishev/qa.coach-prod-web",
             "hostname": "web",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "api-server",
             "image": "pavlochigishev/qa.coach-prod-api-server",
             "hostname": "api-server",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "worker",
             "image": "pavlochigishev/qa.coach-prod-worker",
             "hostname": "worker",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "nginx",
@@ -32,7 +35,8 @@
             ],
             "links": [
                 "web", "api-server"
-            ]
+            ],
+            "memory": 128
         }
     ]
 }
