@@ -3,11 +3,11 @@ services:
   - docker
 
 before_install:
-  - docker build -t pavlochigishev/qa.coach-test-www:latest -f ./www/Dockerfile.dev ./www
+  - docker build -t pavlochigishev/qa.coach-test-web:latest -f ./www/Dockerfile.dev ./www
 
 scripts:
   # unit tests and linting here
-  - docker run -e CI=true pavlochigishev/qa.coach-test-www:latest yarn run test
+  - docker run -e CI=true pavlochigishev/qa.coach-test-web:latest yarn run test
 
 after_success:
   - docker build -t pavlochigishev/qa.coach-prod-web:latest ./www
@@ -21,4 +21,28 @@ after_success:
   - docker push pavlochigishev/qa.coach-prod-api-server
   - docker push pavlochigishev/qa.coach-prod-worker
   - docker push pavlochigishev/qa.coach-prod-nginx
+
+deploy:
+  - provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "qa.coach"
+    env: "www-prod"
+    bucket_name: "elasticbeanstalk-us-east-2-638777900629"
+    bucket_path: "qa.coach"
+    on:
+      tags: true
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    edge: true
+  - provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "qa.coach"
+    env: "www-beta"
+    bucket_name: "elasticbeanstalk-us-east-2-638777900629"
+    bucket_path: "qa.coach"
+    on:
+      branch: develop
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    edge: true
 
