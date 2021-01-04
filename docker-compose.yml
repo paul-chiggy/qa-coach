@@ -44,7 +44,7 @@ services:
       - PGHOST=postgres
       - PGPORT=5432
       - PGPASSWORD=yoursecurepassword
-      - PGDATABASE=qacoach
+      - PGDATABASE=postgres
       - API_PORT=5000
     expose: 
       - 5000
