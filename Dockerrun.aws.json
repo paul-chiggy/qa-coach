@@ -1,0 +1,38 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "web",
+            "image": "pavlochigishev/qa.coach-prod-web",
+            "hostname": "web",
+            "essential": false
+        },
+        {
+            "name": "api-server",
+            "image": "pavlochigishev/qa.coach-prod-api-server",
+            "hostname": "api-server",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "pavlochigishev/qa.coach-prod-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "pavlochigishev/qa.coach-prod-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": [
+                "web", "api-server"
+            ]
+        }
+    ]
+}
